@@ -1,71 +1,78 @@
-module.exports = function( grunt ) {
-	
-	// Dynamically load npm tasks	
-	require('load-grunt-tasks')(grunt);
-		
-	grunt.initConfig( {			
-		pkg: grunt.file.readJSON( 'package.json' ),
-							       
-        concat : {
-			dist : {
-				src : ['project/src/settings.js', 
-					'project/src/svg.js', 
-					'project/src/chart.js', 
-					'project/src/radix.js', 
-					'project/src/transit.js', 
-					'project/src/aspect.js',
-					'project/src/zodiac.js',
-					'project/src/animation/timer.js',
-					'project/src/animation/animator.js',  										
-					'project/src/utils.js'],
-				dest : 'build/<%= pkg.name %>.js' 
-			}
-		},
+module.exports = function (grunt) {
+  // Dynamically load npm tasks
+  require("load-grunt-tasks")(grunt);
 
-		qunit : {
-			files : ['project/test/*.html']
-		},
+  grunt.initConfig({
+    pkg: grunt.file.readJSON("package.json"),
 
-		jshint : {
-			// define the files to lint
-			files : ['gruntfile.js', 'project/src/<%= pkg.name %>.js'],
-			options : {	
-				"-W099": true, // disable: Mixed spaces and tabs.
-				"-W014": true, // disable: Bag line breaking    				
-			}
-		},
+    concat: {
+      dist: {
+        src: [
+          "project/src/settings.js",
+          "project/src/svg.js",
+          "project/src/chart.js",
+          "project/src/radix.js",
+          "project/src/transit.js",
+          "project/src/aspect.js",
+          "project/src/zodiac.js",
+          "project/src/animation/timer.js",
+          "project/src/animation/animator.js",
+          "project/src/utils.js",
+        ],
+        dest: "build/<%= pkg.name %>.js",
+      },
+    },
 
-		uglify : {
-			options : {
-				// the banner is inserted at the top of the output
-				banner : '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
-			},
-			dist : {
-				files : {
-					'build/<%= pkg.name %>.min.js' : ['<%= concat.dist.dest %>']
-				}
-			}
-		},
-      	
-      	watch: {
-  			scripts: {
-    			files: [
-    				 "project/src/*.js",
-    				 "project/src/animation/*.js",          			 
-    			],
-    			tasks: [ 'dev' ],
-    			options: {
-      				spawn: true,
-    			},
-  			},
-		}			    	   	    	   
-	});
-	
-	grunt.registerTask( 'default', [
-		"dev",
-  		"watch"
-	]);	
-	grunt.registerTask('dev', ['jshint', 'concat']);
-	grunt.registerTask('build', ['concat', 'uglify', 'qunit']);
-	grunt.registerTask('test', ['qunit']);
+    qunit: {
+      files: ["project/test/*.html"],
+    },
+
+    jshint: {
+      // define the files to lint
+      files: ["gruntfile.js", "project/src/<%= pkg.name %>.js"],
+      options: {
+        "-W099": true, // disable: Mixed spaces and tabs.
+        "-W014": true, // disable: Bag line breaking
+      },
+    },
+
+    uglify: {
+      options: {
+        // the banner is inserted at the top of the output
+        banner: "/*! <%= pkg.name %> v<%= pkg.version %> */\n",
+      },
+      dist: {
+        files: {
+          "build/<%= pkg.name %>.min.js": ["<%= concat.dist.dest %>"],
+        },
+      },
+    },
+
+    watch: {
+      scripts: {
+        files: ["project/src/*.js", "project/src/animation/*.js"],
+        tasks: ["dev"],
+        options: {
+          spawn: true,
+        },
+      },
+    },
+    // browserSync: {
+    //   dev: {
+    //     bsFiles: {
+    //       src: ["project/examples/2ChartsOnPage/*.html"],
+    //     },
+    //     options: {
+    //       watchTask: true,
+    //       server: "./app",
+    //     },
+    //   },
+    // },
+  });
+
+  grunt.loadNpmTasks("grunt-browser-sync");
+  grunt.registerTask("default", ["dev", "watch"]);
+  grunt.registerTask("dev", ["jshint", "concat"]);
+  grunt.registerTask("build", ["concat", "uglify", "qunit"]);
+  grunt.registerTask("test", ["qunit"]);
 };
