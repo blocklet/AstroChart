@@ -19,10 +19,10 @@
   astrology.SIGNS_COLOR = "#161548";
 
   // Signs strength of lines 星座图标的粗细
-  astrology.SIGNS_STROKE = 1.8;
+  astrology.SIGNS_STROKE = 1;
 
   // Chart margin 星盘的 margin
-  astrology.MARGIN = 0; //px
+  astrology.MARGIN = 20; //px
 
   // Chart Padding 星盘的 padding
   astrology.PADDING = 8; //px
@@ -101,8 +101,8 @@
   astrology.SYMBOL_IC = "Ic";
 
   // 基本点的颜色 - 用不到
-  astrology.SYMBOL_AXIS_FONT_COLOR = "transparent";
-  astrology.SYMBOL_AXIS_STROKE = 0;
+  astrology.SYMBOL_AXIS_FONT_COLOR = "#00000000";
+  astrology.SYMBOL_AXIS_STROKE = 1;
 
   // Cusps
   astrology.SYMBOL_CUSP_1 = "1";
@@ -119,7 +119,7 @@
   astrology.SYMBOL_CUSP_12 = "12";
 
   // Cusps strength of lines 圆圈内月角线的尺寸
-  astrology.CUSPS_STROKE = 1.8;
+  astrology.CUSPS_STROKE = 1;
   astrology.CUSPS_FONT_COLOR = "#D4C9FF";
 
   //Signs

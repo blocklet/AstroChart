@@ -41,9 +41,16 @@
     this.toPoints = JSON.parse(JSON.stringify(this.data.planets)); // Clone object
 
     this.shift = 0;
+    this.shiftForSigns = 0;
+
     if (this.data.cusps && this.data.cusps[0]) {
       var deg360 = astrology.utils.radiansToDegree(2 * Math.PI);
       this.shift = deg360 - this.data.cusps[0];
+    }
+
+    if (this.data.planets && this.data.planets.Ascendant && this.data.planets.Ascendant[0]) {
+      var deg360 = astrology.utils.radiansToDegree(2 * Math.PI);
+      this.shiftForSigns = deg360 - this.data.planets.Ascendant[0];
     }
 
     // preparing wrapper for aspects. It is the lowest layer
@@ -98,7 +105,7 @@
 
     // colors
     for (
-      var i = 0, step = 30, start = this.shift, len = astrology.COLORS_SIGNS.length;
+      var i = 0, step = 30, start = this.shiftForSigns, len = astrology.COLORS_SIGNS.length;
       i < len;
       i++
     ) {
@@ -124,7 +131,7 @@
 
     // signs
     for (
-      var i = 0, step = 30, start = 15 + this.shift, len = astrology.SYMBOL_SIGNS.length;
+      var i = 0, step = 30, start = 15 + this.shiftForSigns, len = astrology.SYMBOL_SIGNS.length;
       i < len;
       i++
     ) {
@@ -171,15 +178,15 @@
           this.cx,
           this.cy,
           this.pointRadius,
-          this.data.planets[planet][0] + this.shift,
+          this.data.planets[planet][0] + this.shiftForSigns,
         );
         var point = {
           name: planet,
           x: position.x,
           y: position.y,
           r: astrology.COLLISION_RADIUS * astrology.SYMBOL_SCALE,
-          angle: this.data.planets[planet][0] + this.shift,
-          pointer: this.data.planets[planet][0] + this.shift,
+          angle: this.data.planets[planet][0] + this.shiftForSigns,
+          pointer: this.data.planets[planet][0] + this.shiftForSigns,
         };
         this.locatedPoints = astrology.utils.assemble(this.locatedPoints, point, {
           cx: this.cx,
@@ -199,13 +206,13 @@
         this.cx,
         this.cy,
         pointerRadius,
-        this.data.planets[point.name][0] + this.shift,
+        this.data.planets[point.name][0] + this.shiftForSigns,
       );
       endPosition = astrology.utils.getPointPosition(
         this.cx,
         this.cy,
         pointerRadius - this.rulerRadius / 2,
-        this.data.planets[point.name][0] + this.shift,
+        this.data.planets[point.name][0] + this.shiftForSigns,
       );
       var pointer = this.paper.line(startPosition.x, startPosition.y, endPosition.x, endPosition.y);
       pointer.setAttribute("stroke", astrology.CIRCLE_COLOR);
@@ -213,7 +220,10 @@
       wrapper.appendChild(pointer);
 
       // draw pointer line
-      if (!astrology.STROKE_ONLY && this.data.planets[point.name][0] + this.shift != point.angle) {
+      if (
+        !astrology.STROKE_ONLY &&
+        this.data.planets[point.name][0] + this.shiftForSigns != point.angle
+      ) {
         startPosition = endPosition;
         endPosition = astrology.utils.getPointPosition(
           this.cx,
@@ -317,7 +327,7 @@
         "stroke-width",
         astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE,
       );
-      wrapper.appendChild(overlapLine);
+      // wrapper.appendChild(overlapLine);
 
       // As
       if (i == AS) {
@@ -482,13 +492,13 @@
           this.cx,
           this.cy,
           this.radius / astrology.INDOOR_CIRCLE_RADIUS_RATIO,
-          aspectsList[i].toPoint.position + this.shift,
+          aspectsList[i].toPoint.position + this.shiftForSigns,
         );
         var endPoint = astrology.utils.getPointPosition(
           this.cx,
           this.cy,
           this.radius / astrology.INDOOR_CIRCLE_RADIUS_RATIO,
-          aspectsList[i].point.position + this.shift,
+          aspectsList[i].point.position + this.shiftForSigns,
         );
 
         var line = this.paper.line(startPoint.x, startPoint.y, endPoint.x, endPoint.y);

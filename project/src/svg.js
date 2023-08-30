@@ -1499,7 +1499,7 @@
     node.setAttribute("stroke-width", astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE);
     node.setAttribute("fill", "none");
 
-    wrapper.appendChild(node);
+    // wrapper.appendChild(node);
 
     return wrapper;
   }
@@ -1578,7 +1578,7 @@
     node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);
     node.setAttribute("stroke-width", astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE);
     node.setAttribute("fill", "none");
-    wrapper.appendChild(node);
+    // wrapper.appendChild(node);
 
     return wrapper;
   }
@@ -1617,7 +1617,7 @@
     node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);
     node.setAttribute("stroke-width", astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE);
     node.setAttribute("fill", "none");
-    wrapper.appendChild(node);
+    // wrapper.appendChild(node);
 
     return wrapper;
   }
@@ -1656,7 +1656,7 @@
     node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);
     node.setAttribute("stroke-width", astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE);
     node.setAttribute("fill", "none");
-    wrapper.appendChild(node);
+    // wrapper.appendChild(node);
 
     return wrapper;
   }
