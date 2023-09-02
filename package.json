@@ -19,7 +19,6 @@
     "build": "grunt build",
     "dev": "grunt"
   },
-  "dependencies": {},
   "devDependencies": {
     "grunt": "^1.6.1",
     "grunt-browser-sync": "^2.2.0",

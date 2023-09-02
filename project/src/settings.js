@@ -9,6 +9,10 @@
   // Color of planet's symbols 行星图标的颜色
   astrology.POINTS_COLOR = "#D4C9FF";
 
+  // Color of planet's symbols 行星高亮的颜色
+  astrology.POINT_HIGHLIGHT_COLOR = "#fbfbfb";
+  // astrology.POINT_HIGHLIGHT_COLOR = "#FF0000";
+
   // Size of description text next to the planet: angle, retrograde, dignities, ...
   astrology.POINTS_TEXT_SIZE = 8;
 

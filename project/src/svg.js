@@ -40,43 +40,43 @@
     context = this;
   };
 
-  astrology.SVG.prototype._getSymbol = function (name, x, y) {
+  astrology.SVG.prototype._getSymbol = function (name, x, y, hightLight) {
     switch (name) {
       case astrology.SYMBOL_SUN:
-        return sun(x, y);
+        return sun(x, y, hightLight);
         break;
       case astrology.SYMBOL_MOON:
-        return moon(x, y);
+        return moon(x, y, hightLight);
         break;
       case astrology.SYMBOL_MERCURY:
-        return mercury(x, y);
+        return mercury(x, y, hightLight);
         break;
       case astrology.SYMBOL_VENUS:
-        return venus(x, y);
+        return venus(x, y, hightLight);
         break;
       case astrology.SYMBOL_MARS:
-        return mars(x, y);
+        return mars(x, y, hightLight);
         break;
       case astrology.SYMBOL_JUPITER:
-        return jupiter(x, y);
+        return jupiter(x, y, hightLight);
         break;
       case astrology.SYMBOL_SATURN:
-        return saturn(x, y);
+        return saturn(x, y, hightLight);
         break;
       case astrology.SYMBOL_URANUS:
-        return uranus(x, y);
+        return uranus(x, y, hightLight);
         break;
       case astrology.SYMBOL_NEPTUNE:
-        return neptune(x, y);
+        return neptune(x, y, hightLight);
         break;
       case astrology.SYMBOL_PLUTO:
-        return pluto(x, y);
+        return pluto(x, y, hightLight);
         break;
       case astrology.SYMBOL_CHIRON:
-        return chiron(x, y);
+        return chiron(x, y, hightLight);
         break;
       case astrology.SYMBOL_LILITH:
-        return lilith(x, y);
+        return lilith(x, y, hightLight);
         break;
       case astrology.SYMBOL_NNODE:
         return nnode(x, y);
@@ -189,12 +189,12 @@
    *
    * @return {SVG g}
    */
-  astrology.SVG.prototype.getSymbol = function (name, x, y) {
-    if (astrology.CUSTOM_SYMBOL_FN == null) return astrology.SVG.prototype._getSymbol(name, x, y);
+  astrology.SVG.prototype.getSymbol = function (name, x, y, hightLight) {
+    if (astrology.CUSTOM_SYMBOL_FN == null) return astrology.SVG.prototype._getSymbol(name, x, y, hightLight);
 
     const symbol = astrology.CUSTOM_SYMBOL_FN(name, x, y, context);
     if (symbol == null || symbol == undefined)
-      return astrology.SVG.prototype._getSymbol(name, x, y);
+      return astrology.SVG.prototype._getSymbol(name, x, y, hightLight);
 
     return symbol;
   };
@@ -254,22 +254,25 @@
    *
    * @return {SVG g}
    */
-  function sun(x, y) {
+  function sun(x, y, hightLight) {
     // center symbol
     var xShift = -1; //px
     var yShift = -8; //px
-    x = Math.round(x + xShift * astrology.SYMBOL_SCALE);
-    y = Math.round(y + yShift * astrology.SYMBOL_SCALE);
+    // var xShift = hightLight ? 1 : -1; //px
+    // var yShift = hightLight? 2: -8; //px
+    var factor = hightLight ? 1.5: 1;
+    x = Math.round(x + xShift * astrology.SYMBOL_SCALE * factor);
+    y = Math.round(y + yShift * astrology.SYMBOL_SCALE * factor);
 
     var wrapper = document.createElementNS(context.root.namespaceURI, "g");
     wrapper.setAttribute(
       "transform",
       "translate(" +
-        -x * (astrology.SYMBOL_SCALE - 1) +
+        -x * (astrology.SYMBOL_SCALE * factor - 1) +
         "," +
-        -y * (astrology.SYMBOL_SCALE - 1) +
+        -y * (astrology.SYMBOL_SCALE * factor - 1) +
         ") scale(" +
-        astrology.SYMBOL_SCALE +
+        astrology.SYMBOL_SCALE* factor +
         ")",
     );
 
@@ -282,7 +285,7 @@
         y +
         " -2.18182,0.727268 -2.181819,1.454543 -1.454552,2.18182 -0.727268,2.181819 0,2.181819 0.727268,2.181819 1.454552,2.18182 2.181819,1.454544 2.18182,0.727276 2.18181,0 2.18182,-0.727276 2.181819,-1.454544 1.454552,-2.18182 0.727268,-2.181819 0,-2.181819 -0.727268,-2.181819 -1.454552,-2.18182 -2.181819,-1.454543 -2.18182,-0.727268 -2.18181,0 m 0.727267,6.54545 -0.727267,0.727276 0,0.727275 0.727267,0.727268 0.727276,0 0.727267,-0.727268 0,-0.727275 -0.727267,-0.727276 -0.727276,0 m 0,0.727276 0,0.727275 0.727276,0 0,-0.727275 -0.727276,0",
     );
-    node.setAttribute("stroke", astrology.POINTS_COLOR);
+    node.setAttribute("stroke", hightLight ? astrology.POINT_HIGHLIGHT_COLOR : astrology.POINTS_COLOR);
     node.setAttribute("stroke-width", astrology.POINTS_STROKE);
     node.setAttribute("fill", "none");
     wrapper.appendChild(node);
@@ -299,22 +302,23 @@
    *
    * @return {SVGPathElement} path
    */
-  function moon(x, y) {
+  function moon(x, y, hightLight) {
     // center symbol
     var xShift = -2; //px
     var yShift = -7; //px
-    x = Math.round(x + xShift * astrology.SYMBOL_SCALE);
-    y = Math.round(y + yShift * astrology.SYMBOL_SCALE);
+    var factor = hightLight ? 1.5 : 1;
+    x = Math.round(x + xShift * astrology.SYMBOL_SCALE * factor);
+    y = Math.round(y + yShift * astrology.SYMBOL_SCALE * factor);
 
     var wrapper = document.createElementNS(context.root.namespaceURI, "g");
     wrapper.setAttribute(
       "transform",
       "translate(" +
-        -x * (astrology.SYMBOL_SCALE - 1) +
+        -x * (astrology.SYMBOL_SCALE * factor - 1) +
         "," +
-        -y * (astrology.SYMBOL_SCALE - 1) +
+        -y * (astrology.SYMBOL_SCALE * factor - 1)  +
         ") scale(" +
-        astrology.SYMBOL_SCALE +
+        astrology.SYMBOL_SCALE * factor +
         ")",
     );
 
@@ -327,7 +331,8 @@
         y +
         " a 7.4969283,7.4969283 0 0 1 0,14.327462 7.4969283,7.4969283 0 1 0 0,-14.327462 z",
     );
-    node.setAttribute("stroke", astrology.POINTS_COLOR);
+    node.setAttribute("stroke",hightLight ? astrology.POINT_HIGHLIGHT_COLOR: astrology.POINTS_COLOR);
+    // node.setAttribute("stroke", "#ff0000");
     node.setAttribute("stroke-width", astrology.POINTS_STROKE);
     node.setAttribute("fill", "none");
     wrapper.appendChild(node);

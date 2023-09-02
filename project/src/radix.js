@@ -632,4 +632,34 @@
     transit.drawCircles();
     return transit;
   };
+
+
+    /**
+   * Display Single Plant transit horoscope
+   *
+   * @param {Object} data
+   * @example
+   *	{
+   *		"planets":{"Moon":[0], "Sun":[30],  ... },
+   *		"cusps":[300, 340, 30, 60, 75, 90, 116, 172, 210, 236, 250, 274],	*
+   *	}
+   *
+   * @return {astrology.PlanetTransit} transit
+   */
+   astrology.Radix.prototype.planetTransit = function (data) {
+    // remove axis (As, Ds, Mc, Ic) from radix
+    astrology.utils.getEmptyWrapper(
+      this.universe,
+      astrology._paperElementId + "-" + astrology.ID_RADIX + "-" + astrology.ID_AXIS,
+    );
+
+    var transit = new astrology.PlanetTransit(context, data);
+    transit.drawBg();
+    transit.drawPoints();
+    transit.drawCusps();
+    transit.drawRuler();
+    transit.drawCircles();
+    return transit;
+  };
 })((window.astrology = window.astrology || {}));
+

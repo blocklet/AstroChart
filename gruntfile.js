@@ -13,6 +13,7 @@ module.exports = function (grunt) {
           "project/src/chart.js",
           "project/src/radix.js",
           "project/src/transit.js",
+          "project/src/planet_transit.js",
           "project/src/aspect.js",
           "project/src/zodiac.js",
           "project/src/animation/timer.js",
